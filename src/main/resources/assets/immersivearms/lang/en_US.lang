@@ -1,0 +1,10 @@
+//Items
+item.laserRifle.name=Laser Rifle
+
+//Blocks
+tile.vanadiumOre.name= Vanadium Ore
+tile.chromiumOre.name=Chromium Ore
+tile.tungstenOre.name=Tungsten Ore
+
+//Tab
+itemGroup.immersivearms=Immersive Arms

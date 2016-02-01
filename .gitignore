@@ -1,50 +1,7 @@
-.gradle
-build/
-
-# Ignore Gradle GUI config
-gradle-app.setting
-
-# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-!gradle-wrapper.jar
-
-# Cache of project
-.gradletasknamecache
-
-# =========================
-# Operating System Files
-# =========================
-
-# OSX
-# =========================
-
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Thumbnails
-._*
-
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
-# Windows
-# =========================
-
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
+
 
 # Folder config file
 Desktop.ini
@@ -60,3 +17,47 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# =========================
+# Operating System Files
+# =========================
+
+# OSX
+# =========================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+*.info
+*.class
+out/production/PowerArmorMod/assets/powerarmormod/textures/models/plasmabolt.png
+out/production/PowerArmorMod/CoFH_at.cfg
+out/production/PowerArmorMod/assets/powerarmormod/textures/models/modelplasmacaster.png
+out/production/PowerArmorMod/assets/powerarmormod/textures/models/modelplasmacasterunique.png
+out/
+eclipse/
+.gradle/
+*.iml
+*.ipr
+*.iws
+gradle/
+libs/
+gradle
+gradlew.bat
+*.gitignore
+build.gradle
+gradlew
