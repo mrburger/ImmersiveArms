@@ -1,5 +1,7 @@
 //Items
 item.laserRifle.name=Laser Rifle
+item.sniperRifle.name=Anti-Materiel Rifle
+item.plasmaRifle.name=Plasma Caster
 
 //Blocks
 tile.vanadiumOre.name= Vanadium Ore

@@ -31,7 +31,7 @@ public class RenderLaserRifle implements IItemRenderer
     public void renderItem(ItemRenderType type, ItemStack item, Object... data)
     {
         GL11.glPushMatrix();
-        GL11.glScalef(0.01F, 0.01F, 0.01F);
+        GL11.glScalef(1F, 1F, 1F);
 
         switch (type) {
 
@@ -40,7 +40,7 @@ public class RenderLaserRifle implements IItemRenderer
                 Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
                 laserRifle.renderAll();
-                GL11.glPopMatrix();
+                ;
             }
 
             case EQUIPPED_FIRST_PERSON:
@@ -48,7 +48,7 @@ public class RenderLaserRifle implements IItemRenderer
                 Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
                 laserRifle.renderAll();
-                GL11.glPopMatrix();
+
             }
 
             case ENTITY:
@@ -56,7 +56,15 @@ public class RenderLaserRifle implements IItemRenderer
                 Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
                 laserRifle.renderAll();
-                GL11.glPopMatrix();
+
+            }
+
+            case INVENTORY:
+            {
+                Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+
+                laserRifle.renderAll();
+
             }
         }
 
