@@ -12,7 +12,7 @@ public class ContainerSniper extends Container
 
     public ContainerSniper(InventoryPlayer inventoryPlayer, World world)
     {
-
+        System.out.println("DEBUG");
         bindPlayerInventory(inventoryPlayer);
     }
 
@@ -27,6 +27,6 @@ public class ContainerSniper extends Container
 
     @Override
     public boolean canInteractWith(EntityPlayer p_75145_1_) {
-        return false;
+        return true;
     }
 }

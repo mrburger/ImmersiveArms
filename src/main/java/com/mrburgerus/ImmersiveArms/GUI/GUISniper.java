@@ -3,22 +3,24 @@ package com.mrburgerus.ImmersiveArms.GUI;
 import blusunrize.immersiveengineering.client.ClientUtils;
 import net.minecraft.client.gui.GuiScreen;
 
-import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
-import net.minecraft.world.World;
+import org.lwjgl.opengl.GL11;
 
 
-public class GUISniper extends GuiScreen
+public class GUISniper extends GuiContainer
 {
-    public static final int GUI_ID = 20;
 
-    public GUISniper()
-    {
-
+    public GUISniper(Container p_i1072_1_) {
+        super(p_i1072_1_);
     }
 
+
+
     @Override
-    public void drawScreen(int x, int y, float f) {
-        this.drawDefaultBackground();
+    protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        ClientUtils.bindTexture("immersiveengineering:textures/gui/revolver.png");
+        this.drawTexturedModalRect(guiLeft,guiTop+77, 0,125, 176,89);
     }
 }

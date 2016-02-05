@@ -1,6 +1,7 @@
 package com.mrburgerus.ImmersiveArms.item;
 
 import blusunrize.immersiveengineering.common.gui.IESlot;
+import blusunrize.immersiveengineering.common.gui.InventoryStorageItem;
 import blusunrize.immersiveengineering.common.items.ItemUpgradeableTool;
 import com.mrburgerus.ImmersiveArms.GUI.GUISniper;
 import com.mrburgerus.ImmersiveArms.Main;
@@ -11,6 +12,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import org.lwjgl.Sys;
 
 public class ItemSniperRifle extends ItemUpgradeableTool
 {
@@ -48,9 +50,10 @@ public class ItemSniperRifle extends ItemUpgradeableTool
     {
         if (!world.isRemote && player.isSneaking())
         {
-            player.openGui(Main.instance, 1, world, (int) player.posX, (int) player.posY, (int) player.posZ);
-
+            System.out.println("WHATS UP");
+            player.openGui(Main.instance, 0, world, (int) player.posX, (int) player.posY, (int) player.posZ);
         }
+        System.out.println("RIGHT");
         return stack;
     }
 }
