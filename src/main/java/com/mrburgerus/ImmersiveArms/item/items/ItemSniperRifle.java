@@ -1,7 +1,9 @@
 package com.mrburgerus.ImmersiveArms.item.items;
 
 import blusunrize.immersiveengineering.api.tool.IInternalStorageItem;
+import com.mrburgerus.ImmersiveArms.ImmersiveArms;
 import com.mrburgerus.ImmersiveArms.entities.EntityBullet50;
+import com.mrburgerus.ImmersiveArms.gui.client.GuiSniperRifle;
 import com.mrburgerus.ImmersiveArms.key.KeyBind;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -27,23 +29,32 @@ public class ItemSniperRifle extends ItemWeapon implements IInternalStorageItem
 
     @Override
     public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player) {
+        boolean canFire = isLoaded(itemstack);
 
-        if (KeyBind.reload.getIsKeyPressed() == true && world.isRemote)
+        if (KeyBind.reload.getIsKeyPressed() == true && !world.isRemote)
         {
             System.out.println("OPEN GUI");
+            player.openGui(ImmersiveArms.instance, GuiSniperRifle.INVNUM, player.worldObj,(int) player.posX, (int) player.posY, (int) player.posZ);
         }
-        else if (isChambered && !world.isRemote) {
-            if (player.capabilities.isCreativeMode || isLoaded(itemstack))
+        else if (isChambered && !world.isRemote)
+        {
+            if (canFire || player.capabilities.isCreativeMode)
             {
+                System.out.println("SHOOTING");
                 world.playSoundAtEntity(player, "immersivearms:anti-materiel", .5F, .0000001F);
                 world.spawnEntityInWorld(new EntityBullet50(world, player));
                 isChambered = false;
             }
         }
-        else if (player.capabilities.isCreativeMode || isLoaded(itemstack))
+        else if (player.capabilities.isCreativeMode || canFire)
+        {
+            System.out.println("Can Shoot");
             world.playSoundAtEntity(player, "note.hat", .5F, .001F);
-        else
+        }
+        else {
+            System.out.println("POOP");
             world.playSoundAtEntity(player, "note.hat", 1F, 1F);
+        }
 
         return itemstack;
     }
@@ -66,7 +77,8 @@ public class ItemSniperRifle extends ItemWeapon implements IInternalStorageItem
     }
 
     @Override
-    public int getInternalSlots(ItemStack itemStack) {
+    public int getInternalSlots(ItemStack itemStack)
+    {
         return 0;
     }
 

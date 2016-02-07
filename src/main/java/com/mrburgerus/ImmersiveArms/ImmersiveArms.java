@@ -43,14 +43,14 @@ public class ImmersiveArms
     @EventHandler
     public void init(FMLInitializationEvent e)
     {
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+
         proxy.init(e);
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent e)
     {
-
+        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
     }
 
     public static CreativeTabs immersiveTab = new CreativeTabs("immersivearms")

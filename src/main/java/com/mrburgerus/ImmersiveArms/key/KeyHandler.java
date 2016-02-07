@@ -14,9 +14,8 @@ public class KeyHandler
     public void onKeyInput(InputEvent.KeyInputEvent event)
     {
         EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-        //World world = Minecraft.getMinecraft().theWorld;
 
-        if(KeyBind.rechamber.isPressed() && player.getCurrentEquippedItem().getItem() instanceof ItemSniperRifle && !ItemSniperRifle.isChambered)
+        if(KeyBind.rechamber.isPressed() && player.getCurrentEquippedItem().getItem() instanceof ItemSniperRifle)
         {
             ItemSniperRifle.rechamberCountDown();
         }
