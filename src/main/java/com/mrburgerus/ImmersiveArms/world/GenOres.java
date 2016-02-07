@@ -1,8 +1,7 @@
 package com.mrburgerus.ImmersiveArms.world;
 
-import com.mrburgerus.ImmersiveArms.item.Blocks;
+import com.mrburgerus.ImmersiveArms.item.blocks.Blocks;
 import cpw.mods.fml.common.IWorldGenerator;
-import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;

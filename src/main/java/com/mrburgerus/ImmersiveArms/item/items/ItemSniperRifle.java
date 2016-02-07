@@ -1,13 +1,11 @@
-package com.mrburgerus.ImmersiveArms.item;
+package com.mrburgerus.ImmersiveArms.item.items;
 
 import blusunrize.immersiveengineering.api.tool.IInternalStorageItem;
 import com.mrburgerus.ImmersiveArms.entities.EntityBullet50;
-import com.mrburgerus.ImmersiveArms.gui.InventorySniper;
-import com.mrburgerus.ImmersiveArms.key.KeyHandler;
+import com.mrburgerus.ImmersiveArms.key.KeyBind;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -17,7 +15,7 @@ public class ItemSniperRifle extends ItemWeapon implements IInternalStorageItem
     public static boolean isChambered = true;
     private static boolean isCount = false;
     private int countDown = 0;
-    private int delay = 35;
+    private int delay = 50;
     //constructors
     public ItemSniperRifle(String unlocalizedName)
     {
@@ -28,11 +26,13 @@ public class ItemSniperRifle extends ItemWeapon implements IInternalStorageItem
 
 
     @Override
-    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player)
-    {
+    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player) {
 
-        if (isChambered && !world.isRemote)
+        if (KeyBind.reload.getIsKeyPressed() == true && world.isRemote)
         {
+            System.out.println("OPEN GUI");
+        }
+        else if (isChambered && !world.isRemote) {
             if (player.capabilities.isCreativeMode || isLoaded(itemstack))
             {
                 world.playSoundAtEntity(player, "immersivearms:anti-materiel", .5F, .0000001F);

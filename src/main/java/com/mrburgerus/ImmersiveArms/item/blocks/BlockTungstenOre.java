@@ -1,14 +1,15 @@
-package com.mrburgerus.ImmersiveArms.item;
+package com.mrburgerus.ImmersiveArms.item.blocks;
+
 
 import com.mrburgerus.ImmersiveArms.ImmersiveArms;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
-public class BlockVanadiumOre extends Block
+public class BlockTungstenOre extends Block
 {
-    String unlocalizedName = "vanadiumOre";
+    String unlocalizedName = "tungstenOre";
 
-    protected BlockVanadiumOre(String unlocalizedName, Material vanadiumOre)
+    protected BlockTungstenOre(String unlocalizedName, Material vanadiumOre)
     {
         super(vanadiumOre);
         this.setBlockName(unlocalizedName);
@@ -20,5 +21,6 @@ public class BlockVanadiumOre extends Block
         this.setHarvestLevel("pickaxe", 2);
         this.setStepSound(soundTypeStone);
     }
-}
 
+
+}

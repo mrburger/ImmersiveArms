@@ -1,4 +1,4 @@
-package com.mrburgerus.ImmersiveArms.item;
+package com.mrburgerus.ImmersiveArms.item.items;
 
 import blusunrize.immersiveengineering.api.tool.IUpgrade;
 import com.mrburgerus.ImmersiveArms.ImmersiveArms;

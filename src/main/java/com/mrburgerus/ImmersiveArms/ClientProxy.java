@@ -1,7 +1,7 @@
 package com.mrburgerus.ImmersiveArms;
 
 import com.mrburgerus.ImmersiveArms.entities.EntityBullet50;
-import com.mrburgerus.ImmersiveArms.item.Items;
+import com.mrburgerus.ImmersiveArms.item.items.Items;
 import com.mrburgerus.ImmersiveArms.render.RenderLaserRifle;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;

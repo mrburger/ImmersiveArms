@@ -1,6 +1,7 @@
 package com.mrburgerus.ImmersiveArms;
 
-import com.mrburgerus.ImmersiveArms.item.Blocks;
+import com.mrburgerus.ImmersiveArms.gui.GuiHandler;
+import com.mrburgerus.ImmersiveArms.item.blocks.Blocks;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -18,11 +19,39 @@ import net.minecraft.item.ItemStack;
 
 public class ImmersiveArms
 {
+    //fields
     public static final String MODID = "immersivearms";
     public static final String VERSION = "0.1";
 
     @Mod.Instance(MODID)
     public static ImmersiveArms instance;
+
+
+
+    @SidedProxy(clientSide="com.mrburgerus.ImmersiveArms.ClientProxy",serverSide="com.mrburgerus.ImmersiveArms.CommonProxy")
+    public static CommonProxy proxy;
+
+
+    @Mod.EventHandler
+    public void preInit(FMLPreInitializationEvent e)
+    {
+
+        proxy.preInit(e);
+        System.out.println("SICK GUITAR SOLO");
+    }
+
+    @EventHandler
+    public void init(FMLInitializationEvent e)
+    {
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+        proxy.init(e);
+    }
+
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent e)
+    {
+
+    }
 
     public static CreativeTabs immersiveTab = new CreativeTabs("immersivearms")
     {
@@ -33,29 +62,4 @@ public class ImmersiveArms
             return new ItemStack(Blocks.vanadiumOre).getItem();
         }
     };
-
-    @SidedProxy(clientSide="com.mrburgerus.ImmersiveArms.ClientProxy", serverSide="com.mrburgerus.ImmersiveArms.ServerProxy")
-    public static CommonProxy proxy;
-
-
-    @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent e)
-    {
-        NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
-        proxy.preInit(e);
-        System.out.println("SICK GUITAR SOLO");
-    }
-
-    @EventHandler
-    public void init(FMLInitializationEvent e)
-    {
-        proxy.init(e);
-
-    }
-
-    @EventHandler
-    public void postInit(FMLPostInitializationEvent e)
-    {
-
-    }
 }

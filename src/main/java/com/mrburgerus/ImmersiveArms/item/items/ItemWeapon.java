@@ -1,26 +1,19 @@
-package com.mrburgerus.ImmersiveArms.item;
+package com.mrburgerus.ImmersiveArms.item.items;
 
 import com.mrburgerus.ImmersiveArms.ImmersiveArms;
 import net.minecraft.item.Item;
 
-public class ItemBullet50 extends Item
+public class ItemWeapon extends Item
 {
     //fields
 
     //constructors
-    public ItemBullet50(String unlocalizedName)
-    {
+    public ItemWeapon(String unlocalizedName) {
         this.setTextureName(ImmersiveArms.MODID + ":" + unlocalizedName);
         this.setUnlocalizedName(unlocalizedName);
         this.setCreativeTab(ImmersiveArms.immersiveTab);
-        this.setMaxStackSize(8);
+        this.setMaxStackSize(1);
     }
 
     //methods
-
-    @Override
-    public boolean isFull3D()
-    {
-        return true;
-    }
 }
