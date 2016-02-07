@@ -1,27 +1,25 @@
-package com.mrburgerus.ImmersiveArms.GUI;
+package com.mrburgerus.ImmersiveArms.gui;
 
-import com.mrburgerus.ImmersiveArms.item.ItemSniperRifle;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-public class GUIHandler implements IGuiHandler
-{
+public class GuiHandler implements IGuiHandler {
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-
-
+        if (ID == GuiSniper.INV_NUM)
+        {
+            return new ContainerSniper(player, player.inventory, new InventorySniper(player.getHeldItem()));
+        }
         return null;
     }
 
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        if (player.getCurrentEquippedItem().getItem() instanceof ItemSniperRifle)
+        if (ID == GuiSniper.INV_NUM)
         {
-            System.out.println("HELLO!");
-            return new ContainerSniper(player.inventory, world);
+            return new GuiSniper(new ContainerSniper(player, player.inventory, new InventorySniper(player.getHeldItem())));
         }
-
         return null;
     }
 }

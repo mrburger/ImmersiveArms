@@ -1,59 +1,70 @@
 package com.mrburgerus.ImmersiveArms.item;
 
+import blusunrize.immersiveengineering.api.tool.IBullet;
+import blusunrize.immersiveengineering.api.tool.IInternalStorageItem;
 import blusunrize.immersiveengineering.common.gui.IESlot;
-import blusunrize.immersiveengineering.common.gui.InventoryStorageItem;
 import blusunrize.immersiveengineering.common.items.ItemUpgradeableTool;
-import com.mrburgerus.ImmersiveArms.GUI.GUISniper;
 import com.mrburgerus.ImmersiveArms.Main;
-import cpw.mods.fml.common.Mod;
+import com.mrburgerus.ImmersiveArms.entities.EntityBullet50;
+import com.mrburgerus.ImmersiveArms.gui.GuiSniper;
+import com.mrburgerus.ImmersiveArms.gui.InventorySniper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import org.lwjgl.Sys;
 
-public class ItemSniperRifle extends ItemUpgradeableTool
+public class ItemSniperRifle extends ItemWeapon implements IInternalStorageItem
 {
+    //fields
 
+    //consturctors
     public ItemSniperRifle(String unlocalizedName)
     {
-        super(unlocalizedName, 1, "SNIPER");
-        this.setTextureName(Main.MODID + ":" + unlocalizedName);
-        this.setUnlocalizedName(unlocalizedName);
-        this.setCreativeTab(Main.immersiveTab);
+        super(unlocalizedName);
     }
 
+    //methods
     @Override
-    public boolean canModify(ItemStack itemStack)
-    {
-        return true;
-    }
-
-    @Override
-    public Slot[] getWorkbenchSlots(Container container, ItemStack itemStack, IInventory iInventory) {
-        return new Slot[]
-                {
-                        new IESlot.Upgrades(container, iInventory, 0, 80, 32, "SNIPER", itemStack, true),
-                        new IESlot.Upgrades(container, iInventory, 1, 100, 32, "SNIPER", itemStack, true),
-                };
-    }
-
-    @Override
-    public int getInternalSlots(ItemStack itemStack)
-    {
-        return 10;
-    }
-
-    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
+    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player)
     {
         if (!world.isRemote && player.isSneaking())
         {
-            System.out.println("WHATS UP");
-            player.openGui(Main.instance, 0, world, (int) player.posX, (int) player.posY, (int) player.posZ);
+            player.openGui(Main.instance, GuiSniper.INV_NUM, world, (int) player.posX, (int) player.posY, (int) player.posZ);
+            System.out.println("HEY!");
         }
-        System.out.println("RIGHT");
-        return stack;
+        else if (!world.isRemote && player.capabilities.isCreativeMode || player.inventory.consumeInventoryItem(Items.bullet50))
+        {
+            world.playSoundAtEntity(player, "random.pop", 1F, .0000001F);
+            world.spawnEntityInWorld(new EntityBullet50(world, player));
+        }
+        else
+            world.playSoundAtEntity(player, "random.pop", 1F, 10F);
+
+        return itemstack;
+    }
+
+    @Override
+    public int getMaxItemUseDuration(ItemStack stack)
+    {
+        return 1;
+    }
+
+
+    @Override
+    public ItemStack[] getContainedItems(ItemStack itemStack) {
+        return new ItemStack[0];
+    }
+
+    @Override
+    public void setContainedItems(ItemStack itemStack, ItemStack[] itemStacks) {
+
+    }
+
+    @Override
+    public int getInternalSlots(ItemStack itemStack) {
+        return 0;
     }
 }

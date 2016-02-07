@@ -1,6 +1,7 @@
 package com.mrburgerus.ImmersiveArms;
 
-import com.mrburgerus.ImmersiveArms.GUI.GUIHandler;
+import com.mrburgerus.ImmersiveArms.gui.GuiHandler;
+import com.mrburgerus.ImmersiveArms.item.Blocks;
 import com.mrburgerus.ImmersiveArms.item.Items;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -31,7 +32,7 @@ public class Main
         @SideOnly(Side.CLIENT)
         public Item getTabIconItem()
         {
-            return new ItemStack(Items.sniperRifle).getItem();
+            return new ItemStack(Blocks.vanadiumOre).getItem();
         }
     };
 
@@ -55,6 +56,6 @@ public class Main
     @EventHandler
     public void postInit(FMLPostInitializationEvent e)
     {
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GUIHandler());
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
     }
 }
