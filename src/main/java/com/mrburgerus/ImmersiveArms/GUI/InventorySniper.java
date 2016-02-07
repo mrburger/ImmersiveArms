@@ -1,14 +1,13 @@
 package com.mrburgerus.ImmersiveArms.gui;
 
 import blusunrize.immersiveengineering.common.items.ItemBullet;
-import com.mrburgerus.ImmersiveArms.Main;
+import com.mrburgerus.ImmersiveArms.ImmersiveArms;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants;
-import org.lwjgl.Sys;
 
 public class InventorySniper implements IInventory
 {
@@ -17,7 +16,7 @@ public class InventorySniper implements IInventory
     private final ItemStack invItem;
     public static final int invSize = 10;
     private ItemStack[] inventory = new ItemStack[invSize];
-    private String tagName = Main.MODID + "SniperInventory";
+    private String tagName = ImmersiveArms.MODID + "SniperInventory";
 
     //constructors
     public InventorySniper(ItemStack itemStack)
@@ -47,20 +46,25 @@ public class InventorySniper implements IInventory
     @Override
     public ItemStack decrStackSize(int slot, int amt)
     {
-        ItemStack stack = getStackInSlot(slot);
-        if(stack != null)
-        {
-            if(stack.stackSize > amt)
-            {
-                stack = stack.splitStack(amt);
-                markDirty();
+        if(this.inventory[slot] != null){
+            ItemStack itemstack;
+
+            if(this.inventory[slot].stackSize <= slot){
+                itemstack = this.inventory[slot];
+                this.inventory[slot] = null;
+                return itemstack;
+            }else{
+                itemstack = this.inventory[slot].splitStack(slot);
+
+                if(this.inventory[slot].stackSize == 0){
+                    this.inventory[slot] = null;
+                }
+
+                return itemstack;
             }
-            else
-            {
-                setInventorySlotContents(slot, null);
-            }
+        }else{
+            return null;
         }
-        return stack;
     }
 
     @Override
@@ -108,7 +112,6 @@ public class InventorySniper implements IInventory
             if (getStackInSlot(j) != null && getStackInSlot(j).stackSize == 0)
                 inventory[j] = null;
         }
-        System.out.println("WORKING!");
         writeToNBT(invItem.getTagCompound());
     }
 
@@ -145,7 +148,7 @@ public class InventorySniper implements IInventory
             int slot = item.getInteger("Slot");
 
             if (slot >= 0 && slot < getSizeInventory())
-                inventory[slot] = ItemStack.loadItemStackFromNBT(item);
+                setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
 
         }
     }

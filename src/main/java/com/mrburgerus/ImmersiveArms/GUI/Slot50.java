@@ -1,8 +1,6 @@
 package com.mrburgerus.ImmersiveArms.gui;
 
-import blusunrize.immersiveengineering.common.gui.IESlot;
-import com.mrburgerus.ImmersiveArms.item.Bullet50;
-import com.mrburgerus.ImmersiveArms.item.ItemSniperRifle;
+import com.mrburgerus.ImmersiveArms.item.ItemBullet50;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -21,6 +19,6 @@ public class Slot50 extends Slot
     @Override
     public boolean isItemValid(ItemStack itemstack)
     {
-        return (itemstack.getItem() instanceof Bullet50);
+        return (itemstack.getItem() instanceof ItemBullet50);
     }
 }

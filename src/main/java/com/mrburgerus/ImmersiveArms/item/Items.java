@@ -15,7 +15,7 @@ public class Items
         //GameRegistry.registerItem(laserRifle = new ItemLaserRifle("laserRifle"), "laserRifle");
         //GameRegistry.registerItem(laserCapacitor = new ItemLaserCapacitor("laserCapacitor"), "laserCapacitor");
         GameRegistry.registerItem(sniperRifle = new ItemSniperRifle("sniperRifle"), "sniperRifle");
-        GameRegistry.registerItem(bullet50 = new Bullet50("bullet50"), "bullet50");
+        GameRegistry.registerItem(bullet50 = new ItemBullet50("bullet50"), "bullet50");
     }
 
 }

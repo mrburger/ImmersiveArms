@@ -1,19 +1,18 @@
 package com.mrburgerus.ImmersiveArms.render;
 
-import com.mrburgerus.ImmersiveArms.Main;
+import com.mrburgerus.ImmersiveArms.ImmersiveArms;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
-import net.minecraftforge.client.model.obj.WavefrontObject;
 import org.lwjgl.opengl.GL11;
 
 public class RenderLaserRifle implements IItemRenderer
 {
-    static IModelCustom laserRifle = AdvancedModelLoader.loadModel(new ResourceLocation(Main.MODID, "models/ModelLaserRifle.obj"));
-    static ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/modelplasmacaster.png" );
+    static IModelCustom laserRifle = AdvancedModelLoader.loadModel(new ResourceLocation(ImmersiveArms.MODID, "models/ModelLaserRifle.obj"));
+    static ResourceLocation texture = new ResourceLocation(ImmersiveArms.MODID, "textures/modelplasmacaster.png" );
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type)

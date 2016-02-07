@@ -1,9 +1,8 @@
 package com.mrburgerus.ImmersiveArms.item;
 
-import com.mrburgerus.ImmersiveArms.Main;
+import com.mrburgerus.ImmersiveArms.ImmersiveArms;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 
 public class BlockChromiumOre extends Block
 {
@@ -13,8 +12,8 @@ public class BlockChromiumOre extends Block
     {
         super(chromiumOre);
         this.setBlockName(unlocalizedName);
-        this.setBlockTextureName(Main.MODID + ":" + unlocalizedName);
-        this.setCreativeTab(Main.immersiveTab);
+        this.setBlockTextureName(ImmersiveArms.MODID + ":" + unlocalizedName);
+        this.setCreativeTab(ImmersiveArms.immersiveTab);
         this.setHardness(7.0F);
         this.setResistance(1500.0F);
         this.setLightLevel(0.0F);

@@ -11,3 +11,8 @@ tile.tungstenOre.name=Tungsten Ore
 
 //Tab
 itemGroup.immersivearms=Immersive Arms
+
+//Keys
+key.categories.ImmersiveArms=Immersive Arms
+key.rechamber=Rechamber Rifle
+key.reload=Open GUI of Rifle

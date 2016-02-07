@@ -1,17 +1,12 @@
 package com.mrburgerus.ImmersiveArms.item;
 
-import blusunrize.immersiveengineering.api.tool.IBullet;
 import blusunrize.immersiveengineering.api.tool.IInternalStorageItem;
-import blusunrize.immersiveengineering.common.gui.IESlot;
-import blusunrize.immersiveengineering.common.items.ItemUpgradeableTool;
-import com.mrburgerus.ImmersiveArms.Main;
 import com.mrburgerus.ImmersiveArms.entities.EntityBullet50;
-import com.mrburgerus.ImmersiveArms.gui.GuiSniper;
 import com.mrburgerus.ImmersiveArms.gui.InventorySniper;
+import com.mrburgerus.ImmersiveArms.key.KeyHandler;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -19,29 +14,36 @@ import net.minecraft.world.World;
 public class ItemSniperRifle extends ItemWeapon implements IInternalStorageItem
 {
     //fields
-
-    //consturctors
+    public static boolean isChambered = true;
+    private static boolean isCount = false;
+    private int countDown = 0;
+    private int delay = 35;
+    //constructors
     public ItemSniperRifle(String unlocalizedName)
     {
         super(unlocalizedName);
     }
 
     //methods
+
+
     @Override
     public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player)
     {
-        if (!world.isRemote && player.isSneaking())
+
+        if (isChambered && !world.isRemote)
         {
-            player.openGui(Main.instance, GuiSniper.INV_NUM, world, (int) player.posX, (int) player.posY, (int) player.posZ);
-            System.out.println("HEY!");
+            if (player.capabilities.isCreativeMode || isLoaded(itemstack))
+            {
+                world.playSoundAtEntity(player, "immersivearms:anti-materiel", .5F, .0000001F);
+                world.spawnEntityInWorld(new EntityBullet50(world, player));
+                isChambered = false;
+            }
         }
-        else if (!world.isRemote && player.capabilities.isCreativeMode || player.inventory.consumeInventoryItem(Items.bullet50))
-        {
-            world.playSoundAtEntity(player, "random.pop", 1F, .0000001F);
-            world.spawnEntityInWorld(new EntityBullet50(world, player));
-        }
+        else if (player.capabilities.isCreativeMode || isLoaded(itemstack))
+            world.playSoundAtEntity(player, "note.hat", .5F, .001F);
         else
-            world.playSoundAtEntity(player, "random.pop", 1F, 10F);
+            world.playSoundAtEntity(player, "note.hat", 1F, 1F);
 
         return itemstack;
     }
@@ -66,5 +68,35 @@ public class ItemSniperRifle extends ItemWeapon implements IInternalStorageItem
     @Override
     public int getInternalSlots(ItemStack itemStack) {
         return 0;
+    }
+
+    public boolean isLoaded(ItemStack itemStack) {
+        ItemStack[] items = this.getContainedItems(itemStack);
+        for (int j = 0; j < items.length; j++) {
+            if (items[j].getItem() instanceof ItemBullet50)
+                return true;
+        }
+        return false;
+    }
+
+    public static void rechamberCountDown()
+    {
+        isCount = true;
+    }
+
+    @Override
+    public void onUpdate(ItemStack itemStack, World world, Entity entity, int i1, boolean b1)
+    {
+        EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+        if (isCount)
+            countDown++;
+        if (countDown <= 3 && isCount)
+             world.playSoundAtEntity(player, "immersivearms:reload", 10F, 1F);
+        if (countDown == delay) {
+            isChambered = true;
+            isCount = false;
+            countDown = 0;
+        }
+
     }
 }

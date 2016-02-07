@@ -13,20 +13,23 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityBullet50 extends EntityBullet {
+public class EntityBullet50 extends EntityBullet
+{
 
     //fields
-    private float speed = 6F;
+    private float speed = 7F;
+    private float damage = 25F;
 
     //constructors
     public EntityBullet50(World world, EntityPlayer player) {
-        super(world);
+        super(world, player);
         setLocationAndAngles(player.posX, player.posY + player.getEyeHeight(), player.posZ, player.rotationYaw, player.rotationPitch);
         motionX = -MathHelper.sin((rotationYaw / 180F) * 3.141593F) * MathHelper.cos((rotationPitch / 180F) * 3.141593F);
         motionZ = MathHelper.cos((rotationYaw / 180F) * 3.141593F) * MathHelper.cos((rotationPitch / 180F) * 3.141593F);
         motionY = -MathHelper.sin((rotationPitch / 180F) * 3.141593F);
         setThrowableHeading(motionX, motionY, motionZ, speed, 0.0F);
-        this.setSize(10F, 10F);
+        this.setSize(.125F, .125F);
+        this.setDamage(damage);
     }
 
     //methods

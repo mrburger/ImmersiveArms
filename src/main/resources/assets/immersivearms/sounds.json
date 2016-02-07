@@ -1,0 +1,4 @@
+{
+  "anti-materiel": {"category": "master", "sounds": ["anti-materiel"]},
+  "reload": {"category": "master", "sounds": ["reload"]}
+}

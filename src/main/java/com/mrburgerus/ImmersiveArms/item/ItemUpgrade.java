@@ -1,7 +1,7 @@
 package com.mrburgerus.ImmersiveArms.item;
 
 import blusunrize.immersiveengineering.api.tool.IUpgrade;
-import com.mrburgerus.ImmersiveArms.Main;
+import com.mrburgerus.ImmersiveArms.ImmersiveArms;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -12,9 +12,9 @@ public class ItemUpgrade extends Item implements IUpgrade
 {
     public ItemUpgrade(String unlocalizedName)
     {
-        this.setTextureName(Main.MODID + ":" + unlocalizedName);
+        this.setTextureName(ImmersiveArms.MODID + ":" + unlocalizedName);
         this.setUnlocalizedName(unlocalizedName);
-        this.setCreativeTab(Main.immersiveTab);
+        this.setCreativeTab(ImmersiveArms.immersiveTab);
         this.setMaxStackSize(1);
     }
 

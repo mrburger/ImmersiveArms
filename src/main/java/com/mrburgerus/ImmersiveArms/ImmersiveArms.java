@@ -1,8 +1,6 @@
 package com.mrburgerus.ImmersiveArms;
 
-import com.mrburgerus.ImmersiveArms.gui.GuiHandler;
 import com.mrburgerus.ImmersiveArms.item.Blocks;
-import com.mrburgerus.ImmersiveArms.item.Items;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -16,15 +14,15 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-@Mod(modid = Main.MODID, version = Main.VERSION, dependencies = "required-after:ImmersiveEngineering")
+@Mod(modid = ImmersiveArms.MODID, version = ImmersiveArms.VERSION, dependencies = "required-after:ImmersiveEngineering")
 
-public class Main
+public class ImmersiveArms
 {
     public static final String MODID = "immersivearms";
     public static final String VERSION = "0.1";
 
-    @Mod.Instance(Main.MODID)
-    public static Main instance;
+    @Mod.Instance(MODID)
+    public static ImmersiveArms instance;
 
     public static CreativeTabs immersiveTab = new CreativeTabs("immersivearms")
     {
@@ -43,6 +41,7 @@ public class Main
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent e)
     {
+        NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
         proxy.preInit(e);
         System.out.println("SICK GUITAR SOLO");
     }
@@ -51,11 +50,12 @@ public class Main
     public void init(FMLInitializationEvent e)
     {
         proxy.init(e);
+
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent e)
     {
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+
     }
 }
