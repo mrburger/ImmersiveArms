@@ -1,6 +1,7 @@
 package com.mrburgerus.ImmersiveArms.item.items;
 
 import com.mrburgerus.ImmersiveArms.ImmersiveArms;
+import com.mrburgerus.ImmersiveArms.gui.inventory.InventorySniperRifle;
 import net.minecraft.item.Item;
 
 public class ItemWeapon extends Item
@@ -16,4 +17,5 @@ public class ItemWeapon extends Item
     }
 
     //methods
+
 }

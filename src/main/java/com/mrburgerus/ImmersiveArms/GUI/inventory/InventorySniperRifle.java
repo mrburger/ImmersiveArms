@@ -12,7 +12,7 @@ public class InventorySniperRifle implements IInventory
 {
     //fields
     public ItemStack parItemStack;
-    private int invSize = 1;
+    public static int invSize = 1;
     public ItemStack[] inventory = new ItemStack[invSize];
     protected String cName = "SniperRifle";
 
@@ -27,6 +27,7 @@ public class InventorySniperRifle implements IInventory
     }
 
     //methods
+
     @Override
     public int getSizeInventory() {
         return invSize;
@@ -34,29 +35,26 @@ public class InventorySniperRifle implements IInventory
 
     @Override
     public ItemStack getStackInSlot(int slot) {
+
         return inventory[slot];
     }
 
     @Override
-    public ItemStack decrStackSize(int decrease, int slot) {
-        ItemStack itemStack = getStackInSlot(slot);
-        if (itemStack != null)
+    public ItemStack decrStackSize(int slot, int amount) {
+        ItemStack stack = getStackInSlot(slot);
+        if(stack != null)
         {
-            if (itemStack.stackSize <= decrease)
+            if(stack.stackSize > amount)
             {
-                setInventorySlotContents(slot, null);
+                stack = stack.splitStack(amount);
+                markDirty();
             }
             else
             {
-                itemStack = itemStack.splitStack(decrease);
-                if (itemStack.stackSize == 0)
-                {
-                    setInventorySlotContents(slot, null);
-                }
+                setInventorySlotContents(slot, null);
             }
         }
-
-        return itemStack;
+        return stack;
     }
 
     @Override
@@ -88,7 +86,7 @@ public class InventorySniperRifle implements IInventory
 
     @Override
     public int getInventoryStackLimit() {
-        return 6;
+        return 5;
     }
 
     @Override

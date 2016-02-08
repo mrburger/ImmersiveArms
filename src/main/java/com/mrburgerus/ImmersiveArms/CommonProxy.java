@@ -10,6 +10,8 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 
 public class CommonProxy
 {
@@ -33,4 +35,10 @@ public class CommonProxy
     {
 
     }
+
+
+    public static void onScopeZoom(ItemStack stack, EntityPlayer player)
+    {
+    }
+
 }

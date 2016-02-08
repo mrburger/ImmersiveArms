@@ -13,7 +13,7 @@ public class ItemBullet50 extends Item
         this.setTextureName(ImmersiveArms.MODID + ":" + unlocalizedName);
         this.setUnlocalizedName(unlocalizedName);
         this.setCreativeTab(ImmersiveArms.immersiveTab);
-        this.setMaxStackSize(8);
+        this.setMaxStackSize(10);
     }
 
     //methods
