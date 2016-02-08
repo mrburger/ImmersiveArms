@@ -9,6 +9,7 @@ public class Items
     public static Item laserCapacitor;
     public static Item sniperRifle;
     public static Item bullet50;
+    public static Item bullet50Case;
 
     public static final void init()
     {
@@ -16,6 +17,7 @@ public class Items
         //GameRegistry.registerItem(laserCapacitor = new ItemLaserCapacitor("laserCapacitor"), "laserCapacitor");
         GameRegistry.registerItem(sniperRifle = new ItemSniperRifle("sniperRifle"), "sniperRifle");
         GameRegistry.registerItem(bullet50 = new ItemBullet50("bullet50"), "bullet50");
+        GameRegistry.registerItem(bullet50Case = new ItemBullet50Case("bullet50Case"), "bullet50Case");
     }
 
 }

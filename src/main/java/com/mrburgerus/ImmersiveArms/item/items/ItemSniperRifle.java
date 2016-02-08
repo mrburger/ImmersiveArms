@@ -9,6 +9,7 @@ import com.mrburgerus.ImmersiveArms.gui.inventory.InventorySniperRifle;
 import com.mrburgerus.ImmersiveArms.key.KeyBind;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -49,26 +50,23 @@ public class ItemSniperRifle extends ItemWeapon implements IInternalStorageItem
         {
             if (canFire)
             {
-                System.out.println("SHOOTING");
                 world.playSoundAtEntity(player, "immersivearms:anti-materiel", .5F, .0000001F);
                 world.spawnEntityInWorld(new EntityBullet50(world, player));
                 inventorySniperRifle.getStackInSlot(0).stackSize--;
+                world.spawnEntityInWorld(new EntityItem(world, player.posX, player.posY, player.posZ, new ItemStack(Items.bullet50Case, 1)));
                 inventorySniperRifle.markDirty();
                 isChambered = false;
             }
         }
         else if (isChambered)
         {
-            System.out.println("Not Loaded, Chambered");
             world.playSoundAtEntity(player, "note.hat", .5F, .001F);
         }
         else if (canFire)
         {
-            System.out.println("Can Fire");
             world.playSoundAtEntity(player, "note.hat", .5F, .001F);
         }
         else {
-            System.out.println("POOP");
             world.playSoundAtEntity(player, "note.hat", 1F, 1F);
         }
 

@@ -2,7 +2,8 @@
 item.laserRifle.name=Laser Rifle
 item.sniperRifle.name=Anti-Materiel Rifle
 item.plasmaRifle.name=Plasma Caster
-item.bullet50.name= .50 MMG Round
+item.bullet50.name=.50 MMG Round
+item.bullet50Case.name=.50 MMG Case
 
 //Blocks
 tile.vanadiumOre.name= Vanadium Ore
