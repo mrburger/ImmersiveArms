@@ -37,7 +37,11 @@ public class RenderSniperRifle implements IItemRenderer {
         GL11.glPushMatrix();
         Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
-        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON)
+        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON && Minecraft.getMinecraft().thePlayer.isSneaking())
+        {
+
+        }
+        else if (type == ItemRenderType.EQUIPPED_FIRST_PERSON)
         {
             float scale = 4F;
             GL11.glScalef(scale, scale, scale);

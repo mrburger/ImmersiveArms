@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import java.util.HashMap;
 import java.util.Set;
 
-public class ItemUpgrade extends Item implements IUpgrade
+public abstract class ItemUpgrade extends Item implements IUpgrade
 {
     public ItemUpgrade(String unlocalizedName)
     {
@@ -19,20 +19,11 @@ public class ItemUpgrade extends Item implements IUpgrade
     }
 
     @Override
-    public Set<String> getUpgradeTypes(ItemStack itemStack)
-    {
-        return null;
-    }
+    public abstract Set<String> getUpgradeTypes(ItemStack itemStack);
 
     @Override
-    public boolean canApplyUpgrades(ItemStack itemStack, ItemStack itemStack1)
-    {
-        return false;
-    }
+    public abstract boolean canApplyUpgrades(ItemStack itemStack, ItemStack itemStack1);
 
     @Override
-    public void applyUpgrades(ItemStack itemStack, ItemStack itemStack1, HashMap<String, Object> hashMap)
-    {
-
-    }
+    public abstract void applyUpgrades(ItemStack itemStack, ItemStack itemStack1, HashMap<String, Object> hashMap);
 }

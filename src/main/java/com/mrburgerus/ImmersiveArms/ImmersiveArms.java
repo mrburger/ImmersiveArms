@@ -1,6 +1,7 @@
 package com.mrburgerus.ImmersiveArms;
 
 import com.mrburgerus.ImmersiveArms.gui.GuiHandler;
+import com.mrburgerus.ImmersiveArms.gui.client.GuiZoom;
 import com.mrburgerus.ImmersiveArms.item.blocks.Blocks;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -11,9 +12,11 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid = ImmersiveArms.MODID, version = ImmersiveArms.VERSION, dependencies = "required-after:ImmersiveEngineering")
 
@@ -51,6 +54,7 @@ public class ImmersiveArms
     public void postInit(FMLPostInitializationEvent e)
     {
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
+        MinecraftForge.EVENT_BUS.register(new GuiZoom(Minecraft.getMinecraft()));
     }
 
     public static CreativeTabs immersiveTab = new CreativeTabs("immersivearms")

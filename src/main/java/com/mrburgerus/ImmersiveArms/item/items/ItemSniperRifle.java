@@ -1,7 +1,7 @@
 package com.mrburgerus.ImmersiveArms.item.items;
 
 import blusunrize.immersiveengineering.api.tool.IInternalStorageItem;
-import com.mrburgerus.ImmersiveArms.ClientZoomHandler;
+import blusunrize.immersiveengineering.common.gui.IESlot;
 import com.mrburgerus.ImmersiveArms.ImmersiveArms;
 import com.mrburgerus.ImmersiveArms.entities.EntityBullet50;
 import com.mrburgerus.ImmersiveArms.gui.client.GuiSniperRifle;
@@ -11,10 +11,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemSniperRifle extends ItemWeapon implements IInternalStorageItem
+public class ItemSniperRifle extends ItemWeapon
 {
     //fields
     public static boolean isChambered = false;
@@ -22,10 +25,11 @@ public class ItemSniperRifle extends ItemWeapon implements IInternalStorageItem
     private int countDown = 0;
     private int delay = 40;
     boolean canFire;
+    public static boolean hasMags;
     //constructors
     public ItemSniperRifle(String unlocalizedName)
     {
-        super(unlocalizedName);
+        super(unlocalizedName, "SNIPER");
     }
 
     //methods
@@ -33,7 +37,7 @@ public class ItemSniperRifle extends ItemWeapon implements IInternalStorageItem
 
     @Override
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-        return super.onLeftClickEntity(stack, player, entity);
+        return true;
     }
 
     @Override
@@ -43,8 +47,11 @@ public class ItemSniperRifle extends ItemWeapon implements IInternalStorageItem
 
         if (KeyBind.reload.getIsKeyPressed() == true && !world.isRemote)
         {
-            System.out.println("OPEN GUI");
             player.openGui(ImmersiveArms.instance, GuiSniperRifle.INVNUM, player.worldObj,(int) player.posX, (int) player.posY, (int) player.posZ);
+        }
+        else if (!isChambered && !world.isRemote)
+        {
+            rechamberCountDown();
         }
         else if (isChambered && !world.isRemote)
         {
@@ -60,6 +67,7 @@ public class ItemSniperRifle extends ItemWeapon implements IInternalStorageItem
         }
         else if (isChambered)
         {
+            System.out.println();
             world.playSoundAtEntity(player, "note.hat", .5F, .001F);
         }
         else if (canFire)
@@ -81,20 +89,24 @@ public class ItemSniperRifle extends ItemWeapon implements IInternalStorageItem
 
 
     @Override
-    public ItemStack[] getContainedItems(ItemStack itemStack) {
-        return new ItemStack[0];
+    public boolean canModify(ItemStack stack) {
+        return true;
     }
 
     @Override
-    public void setContainedItems(ItemStack itemStack, ItemStack[] itemStacks) {
-
+    public Slot[] getWorkbenchSlots(Container container, ItemStack stack, IInventory invItem) {
+        return new Slot[]
+                {
+                        new IESlot.Upgrades(container, invItem,0, 80, 32, "SNIPER", stack, true),
+                        new IESlot.Upgrades(container, invItem,1, 100, 32, "SNIPER", stack, true),
+                };
     }
 
     @Override
-    public int getInternalSlots(ItemStack itemStack)
-    {
-        return 0;
+    public int getInternalSlots(ItemStack itemStack) {
+        return 2;
     }
+
 
     public static void rechamberCountDown()
     {
@@ -109,7 +121,7 @@ public class ItemSniperRifle extends ItemWeapon implements IInternalStorageItem
         boolean shoot = isLoaded(inventorySniperRifle);
         if (isCount && shoot)
             countDown++;
-        if (countDown <= 2 && isCount && shoot)
+        if (countDown == 1 && isCount && shoot)
              world.playSoundAtEntity(player, "immersivearms:reload", 10F, 1F);
         if (countDown == delay) {
             isChambered = true;

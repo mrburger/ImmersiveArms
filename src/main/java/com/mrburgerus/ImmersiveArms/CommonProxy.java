@@ -3,15 +3,12 @@ package com.mrburgerus.ImmersiveArms;
 import com.mrburgerus.ImmersiveArms.item.blocks.Blocks;
 import com.mrburgerus.ImmersiveArms.item.items.Items;
 import com.mrburgerus.ImmersiveArms.key.KeyBind;
-import com.mrburgerus.ImmersiveArms.key.KeyHandler;
 import com.mrburgerus.ImmersiveArms.world.GenOres;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 
 public class CommonProxy
 {
@@ -19,7 +16,6 @@ public class CommonProxy
     {
         Blocks.init();
         Items.init();
-        FMLCommonHandler.instance().bus().register(new KeyHandler());
         KeyBind.init();
 
 
@@ -34,11 +30,6 @@ public class CommonProxy
     public void postInit(FMLPostInitializationEvent e)
     {
 
-    }
-
-
-    public static void onScopeZoom(ItemStack stack, EntityPlayer player)
-    {
     }
 
 }

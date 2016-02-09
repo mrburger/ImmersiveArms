@@ -1,6 +1,7 @@
 package com.mrburgerus.ImmersiveArms.gui.inventory;
 
 import com.mrburgerus.ImmersiveArms.item.items.ItemBullet50;
+import com.mrburgerus.ImmersiveArms.item.items.ItemSniperRifle;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
@@ -15,6 +16,7 @@ public class InventorySniperRifle implements IInventory
     public static int invSize = 1;
     public ItemStack[] inventory = new ItemStack[invSize];
     protected String cName = "SniperRifle";
+    public int invLim;
 
     //constructors
     public InventorySniperRifle(ItemStack itemStack)
@@ -86,7 +88,8 @@ public class InventorySniperRifle implements IInventory
 
     @Override
     public int getInventoryStackLimit() {
-        return 5;
+
+        return invLim;
     }
 
     @Override
@@ -163,4 +166,5 @@ public class InventorySniperRifle implements IInventory
         }
         nbtTagCompound.setTag(cName, tagList);
     }
+
 }

@@ -10,6 +10,8 @@ public class Items
     public static Item sniperRifle;
     public static Item bullet50;
     public static Item bullet50Case;
+    public static Item sniperMags;
+    public static Item sniperSuppressor;
 
     public static final void init()
     {
@@ -18,6 +20,8 @@ public class Items
         GameRegistry.registerItem(sniperRifle = new ItemSniperRifle("sniperRifle"), "sniperRifle");
         GameRegistry.registerItem(bullet50 = new ItemBullet50("bullet50"), "bullet50");
         GameRegistry.registerItem(bullet50Case = new ItemBullet50Case("bullet50Case"), "bullet50Case");
+        GameRegistry.registerItem(sniperMags = new ItemSniperExtendedMags("sniperMags"), "sniperMags");
+        GameRegistry.registerItem(sniperSuppressor = new ItemSniperSuppressor("snipersuppressor"), "snipersuppressor");
     }
 
 }

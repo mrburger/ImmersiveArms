@@ -14,10 +14,10 @@ public class KeyBind
     public static void init() {
 
         reload = new KeyBinding("key.reload", Keyboard.KEY_R, "key.categories.ImmersiveArms");
-        rechamber = new KeyBinding("key.rechamber", Keyboard.KEY_G, "key.categories.ImmersiveArms");
+        //rechamber = new KeyBinding("key.rechamber", Keyboard.KEY_G, "key.categories.ImmersiveArms");
 
 
         ClientRegistry.registerKeyBinding(reload);
-        ClientRegistry.registerKeyBinding(rechamber);
+        //ClientRegistry.registerKeyBinding(rechamber);
     }
 }
