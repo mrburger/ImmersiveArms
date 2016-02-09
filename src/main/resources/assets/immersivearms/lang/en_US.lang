@@ -5,6 +5,7 @@ item.plasmaRifle.name=Plasma Caster
 item.bullet50.name=.50 MMG Round
 item.bullet50Case.name=.50 MMG Case
 item.sniperMags.name=AMR Extended Magazines
+item.pistol.name=Gangsta Special
 
 //Blocks
 tile.vanadiumOre.name= Vanadium Ore

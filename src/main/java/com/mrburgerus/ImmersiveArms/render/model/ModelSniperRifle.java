@@ -1,5 +1,7 @@
 package com.mrburgerus.ImmersiveArms.render.model;
 
+import com.mrburgerus.ImmersiveArms.item.items.ItemSniperRifle;
+import com.mrburgerus.ImmersiveArms.item.items.ItemWeapon;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -284,8 +286,40 @@ public class ModelSniperRifle extends ModelBase
         ScopeFront.render(f5);
         BulletBolt.render(f5);
     }
-  
-  private void setRotation(ModelRenderer model, float x, float y, float z)
+
+    public void renderModelnoBrake(float f5)
+    {
+        Barrel.render(f5);
+        BarrelBack.render(f5);
+        BodyFront.render(f5);
+        Rib.render(f5);
+        BodyReciever.render(f5);
+        Reciever2.render(f5);
+        BodyInter.render(f5);
+        RibBack.render(f5);
+        BottomRib.render(f5);
+        BoltCut1.render(f5);
+        BoltCut2.render(f5);
+        BoltCut3.render(f5);
+        RibBolt.render(f5);
+        Magazine.render(f5);
+        MagCatch.render(f5);
+        Grip.render(f5);
+        MagHold.render(f5);
+        Guard.render(f5);
+        StockStem.render(f5);
+        Stock1.render(f5);
+        Stock2.render(f5);
+        ScopeMBack.render(f5);
+        ScopeMFront.render(f5);
+        ScopeTube.render(f5);
+        EyePiece.render(f5);
+        ScopeFront.render(f5);
+        BulletBolt.render(f5);
+    }
+
+
+    private void setRotation(ModelRenderer model, float x, float y, float z)
   {
     model.rotateAngleX = x;
     model.rotateAngleY = y;

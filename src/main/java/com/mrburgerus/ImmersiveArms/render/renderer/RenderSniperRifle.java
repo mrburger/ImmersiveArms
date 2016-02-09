@@ -1,22 +1,35 @@
 package com.mrburgerus.ImmersiveArms.render.renderer;
 
+import blusunrize.immersiveengineering.api.tool.IUpgradeableTool;
 import com.mrburgerus.ImmersiveArms.ImmersiveArms;
+import com.mrburgerus.ImmersiveArms.item.items.ItemSniperRifle;
+import com.mrburgerus.ImmersiveArms.item.items.ItemWeapon;
 import com.mrburgerus.ImmersiveArms.render.model.ModelSniperRifle;
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.model.AdvancedModelLoader;
+import net.minecraftforge.client.model.IModelCustom;
+import net.minecraftforge.client.model.obj.WavefrontObject;
 import org.lwjgl.opengl.GL11;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class RenderSniperRifle implements IItemRenderer {
     //fields
-    private ModelSniperRifle sniperRifle;
-    public static ResourceLocation texture = new ResourceLocation(ImmersiveArms.MODID + ":" + "textures/models/sniperrifle.png" );
+    static IModelCustom sniperRifle;
+    public static ResourceLocation texture;
 
     //constructors
     public RenderSniperRifle()
     {
-        sniperRifle = new ModelSniperRifle();
+        sniperRifle = AdvancedModelLoader.loadModel(new ResourceLocation(ImmersiveArms.MODID + ":" + "models/ModelSniperRifle.obj"));
+        texture = new ResourceLocation(ImmersiveArms.MODID + ":" + "textures/models/sniperRifle.png");
     }
 
     //methods
@@ -39,7 +52,8 @@ public class RenderSniperRifle implements IItemRenderer {
 
         if (type == ItemRenderType.EQUIPPED_FIRST_PERSON && Minecraft.getMinecraft().thePlayer.isSneaking())
         {
-
+            GL11.glPopMatrix();
+            return;
         }
         else if (type == ItemRenderType.EQUIPPED_FIRST_PERSON)
         {
@@ -51,8 +65,13 @@ public class RenderSniperRifle implements IItemRenderer {
             GL11.glRotatef(45F, 0F, -1F, 0F);
             //translate
             GL11.glTranslatef(1F, -0.1F, -0.1F);
+            //fix OBJ
+            GL11.glRotatef(180F, 1F, 0F, 0F);
+            GL11.glRotatef(180F, 0F, 1F, 0F);
+            GL11.glTranslatef(0F, -1.5F, -0.2F);
+            GL11.glRotatef(10F, 0F, -1F, 0F);
 
-            this.sniperRifle.renderModel(.0625F);
+
         }
         else if (type == ItemRenderType.EQUIPPED)
         {
@@ -66,8 +85,9 @@ public class RenderSniperRifle implements IItemRenderer {
             //Put in hand
             GL11.glRotatef(70F, 0F, 0F, 1F);
             GL11.glTranslatef(0.5F, 0.6F, 0F);
+            //fix OBJ
 
-            this.sniperRifle.renderModel(.0625F);
+
         }
         else if (type == ItemRenderType.ENTITY)
         {
@@ -76,7 +96,7 @@ public class RenderSniperRifle implements IItemRenderer {
             //rotate upright
             GL11.glRotatef(180F, 0F, 0F, 1F);
 
-            this.sniperRifle.renderModel(.0625F);
+
         }
         else if (type == ItemRenderType.INVENTORY)
         {
@@ -86,11 +106,25 @@ public class RenderSniperRifle implements IItemRenderer {
             GL11.glRotatef(180F, 0F, 0F, 1F);
             //translate into slot
             GL11.glTranslatef(0.1F, 0F, 0F);
+            //fix OBJ
+            GL11.glRotatef(180F, 1F, 0F, 0F);
+            GL11.glRotatef(180F, 0F, 1F, 0F);
+            GL11.glTranslatef(0F, -1F, 0F);
 
-            this.sniperRifle.renderModel(.0625F);
+
+        }
+        NBTTagCompound upgrades = ((ItemSniperRifle)item.getItem()).getUpgrades(item);
+        if (upgrades.getBoolean("sniperSuppressor"))
+        {
+            sniperRifle.renderAll();
+        }
+        else
+        {
+            sniperRifle.renderAllExcept("Brake", "FrontSight");
         }
 
         GL11.glPopMatrix();
     }
+
 }
 

@@ -17,7 +17,7 @@ public class EntityBullet50 extends EntityBullet
 {
 
     //fields
-    private float speed = 7F;
+    private float speed = 20F;
     private float damage = 25F;
 
     //constructors

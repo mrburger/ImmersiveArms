@@ -16,7 +16,7 @@ public class InventorySniperRifle implements IInventory
     public static int invSize = 1;
     public ItemStack[] inventory = new ItemStack[invSize];
     protected String cName = "SniperRifle";
-    public int invLim;
+    public int invLim = 5;
 
     //constructors
     public InventorySniperRifle(ItemStack itemStack)

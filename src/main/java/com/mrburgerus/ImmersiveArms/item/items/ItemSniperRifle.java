@@ -15,7 +15,12 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+
+import java.util.HashSet;
 
 public class ItemSniperRifle extends ItemWeapon
 {
@@ -49,15 +54,23 @@ public class ItemSniperRifle extends ItemWeapon
         {
             player.openGui(ImmersiveArms.instance, GuiSniperRifle.INVNUM, player.worldObj,(int) player.posX, (int) player.posY, (int) player.posZ);
         }
-        else if (!isChambered && !world.isRemote)
+        else if (!isChambered  && !world.isRemote)
         {
             rechamberCountDown();
         }
-        else if (isChambered && !world.isRemote)
+        else if (isChambered  && !world.isRemote)
         {
             if (canFire)
             {
-                world.playSoundAtEntity(player, "immersivearms:anti-materiel", .5F, .0000001F);
+                if (((ItemSniperRifle) itemstack.getItem()).getUpgrades(itemstack).getBoolean("sniperSuppressor"))
+                {
+                    world.playSoundAtEntity(player, "immersivearms:anti-materiel", .5F, .0000001F);
+                }
+                else
+                {
+                    world.playSoundAtEntity(player, "immersivearms:anti-materiel", 10F, .0000001F);
+                    player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20, 40));
+                }
                 world.spawnEntityInWorld(new EntityBullet50(world, player));
                 inventorySniperRifle.getStackInSlot(0).stackSize--;
                 world.spawnEntityInWorld(new EntityItem(world, player.posX, player.posY, player.posZ, new ItemStack(Items.bullet50Case, 1)));
@@ -142,4 +155,5 @@ public class ItemSniperRifle extends ItemWeapon
     public boolean isFull3D() {
         return true;
     }
+
 }

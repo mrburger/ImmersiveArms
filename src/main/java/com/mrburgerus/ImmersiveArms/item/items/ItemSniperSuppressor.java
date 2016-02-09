@@ -24,6 +24,6 @@ public class ItemSniperSuppressor extends ItemUpgrade
 
     @Override
     public void applyUpgrades(ItemStack itemStack, ItemStack itemStack1, HashMap<String, Object> hashMap) {
-        hashMap.put("sniperMags", true);
+        hashMap.put("sniperSuppressor", true);
     }
 }
