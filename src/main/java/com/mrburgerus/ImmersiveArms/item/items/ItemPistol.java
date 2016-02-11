@@ -9,9 +9,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-/**
- * Created by mrburgerUS on 2/9/2016.
- */
 public class ItemPistol extends ItemWeapon {
     //fields
     boolean canFire = true;
