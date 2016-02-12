@@ -1,6 +1,5 @@
 package com.mrburgerus.ImmersiveArms.item.items;
 
-import blusunrize.immersiveengineering.api.tool.IInternalStorageItem;
 import blusunrize.immersiveengineering.common.gui.IESlot;
 import com.mrburgerus.ImmersiveArms.ImmersiveArms;
 import com.mrburgerus.ImmersiveArms.entities.EntityBullet50;
@@ -15,12 +14,9 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-
-import java.util.HashSet;
 
 public class ItemSniperRifle extends ItemWeapon
 {
@@ -29,7 +25,8 @@ public class ItemSniperRifle extends ItemWeapon
     private static boolean isCount = false;
     private int countDown = 0;
     private int delay = 40;
-    boolean canFire;
+    private boolean canFire;
+    private boolean isAbleToFire = true;
     public static boolean hasMags;
     //constructors
     public ItemSniperRifle(String unlocalizedName)
@@ -50,45 +47,28 @@ public class ItemSniperRifle extends ItemWeapon
         InventorySniperRifle inventorySniperRifle = new InventorySniperRifle(itemstack);
         canFire = isLoaded(inventorySniperRifle);
 
-        if (KeyBind.reload.getIsKeyPressed() == true && !world.isRemote)
-        {
-            player.openGui(ImmersiveArms.instance, GuiSniperRifle.INVNUM, player.worldObj,(int) player.posX, (int) player.posY, (int) player.posZ);
-        }
-        else if (!isChambered  && !world.isRemote)
-        {
-            rechamberCountDown();
-        }
-        else if (isChambered  && !world.isRemote)
-        {
-            if (canFire)
-            {
-                if (((ItemSniperRifle) itemstack.getItem()).getUpgrades(itemstack).getBoolean("sniperSuppressor"))
-                {
-                    world.playSoundAtEntity(player, "immersivearms:anti-materiel", .5F, .0000001F);
+        if (isAbleToFire) {
+            if (KeyBind.reload.getIsKeyPressed() == true && !world.isRemote) {
+                player.openGui(ImmersiveArms.instance, GuiSniperRifle.INVNUM, player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
+            } else if (!isChambered && !world.isRemote) {
+                rechamberCountDown();
+                isAbleToFire = false;
+            } else if (isChambered && !world.isRemote) {
+                if (canFire) {
+                    if (((ItemSniperRifle) itemstack.getItem()).getUpgrades(itemstack).getBoolean("sniperSuppressor") || (player.inventory.armorInventory[3] != null && player.inventory.armorInventory[3].getItem() instanceof ItemEarMuffs)) {
+                        world.playSoundAtEntity(player, "immersivearms:anti-materiel", .1F, .0000001F);
+                    } else {
+                        world.playSoundAtEntity(player, "immersivearms:anti-materiel", 1F, .0000001F);
+                        player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20, 40));
+                    }
+                    world.spawnEntityInWorld(new EntityBullet50(world, player));
+                    inventorySniperRifle.getStackInSlot(0).stackSize--;
+                    world.spawnEntityInWorld(new EntityItem(world, player.posX, player.posY, player.posZ, new ItemStack(Items.bullet50Case, 1)));
+                    inventorySniperRifle.markDirty();
+                    isChambered = false;
+                    isAbleToFire = false;
                 }
-                else
-                {
-                    world.playSoundAtEntity(player, "immersivearms:anti-materiel", 10F, .0000001F);
-                    player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20, 40));
-                }
-                world.spawnEntityInWorld(new EntityBullet50(world, player));
-                inventorySniperRifle.getStackInSlot(0).stackSize--;
-                world.spawnEntityInWorld(new EntityItem(world, player.posX, player.posY, player.posZ, new ItemStack(Items.bullet50Case, 1)));
-                inventorySniperRifle.markDirty();
-                isChambered = false;
             }
-        }
-        else if (isChambered)
-        {
-            System.out.println();
-            world.playSoundAtEntity(player, "note.hat", .5F, .001F);
-        }
-        else if (canFire)
-        {
-            world.playSoundAtEntity(player, "note.hat", .5F, .001F);
-        }
-        else {
-            world.playSoundAtEntity(player, "note.hat", 1F, 1F);
         }
 
         return itemstack;
@@ -97,7 +77,7 @@ public class ItemSniperRifle extends ItemWeapon
     @Override
     public int getMaxItemUseDuration(ItemStack stack)
     {
-        return 1;
+        return 7200;
     }
 
 
@@ -141,6 +121,13 @@ public class ItemSniperRifle extends ItemWeapon
             isCount = false;
             countDown = 0;
         }
+
+        if (!Minecraft.getMinecraft().gameSettings.keyBindUseItem.getIsKeyPressed() && !isAbleToFire)
+        {
+            isAbleToFire = true;
+        }
+
+
     }
 
     public static boolean isLoaded(InventorySniperRifle inventorySniperRifle)

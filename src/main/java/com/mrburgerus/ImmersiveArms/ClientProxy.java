@@ -2,10 +2,7 @@ package com.mrburgerus.ImmersiveArms;
 
         import com.mrburgerus.ImmersiveArms.entities.EntityBullet50;
         import com.mrburgerus.ImmersiveArms.item.items.Items;
-        import com.mrburgerus.ImmersiveArms.render.renderer.RenderBullet50;
-        import com.mrburgerus.ImmersiveArms.render.renderer.RenderBullet50Case;
-        import com.mrburgerus.ImmersiveArms.render.renderer.RenderPistol;
-        import com.mrburgerus.ImmersiveArms.render.renderer.RenderSniperRifle;
+        import com.mrburgerus.ImmersiveArms.render.renderer.*;
         import cpw.mods.fml.client.registry.RenderingRegistry;
         import cpw.mods.fml.common.event.FMLPostInitializationEvent;
         import cpw.mods.fml.common.registry.EntityRegistry;
@@ -24,6 +21,7 @@ public class ClientProxy extends CommonProxy
         MinecraftForgeClient.registerItemRenderer(Items.bullet50, new RenderBullet50());
         MinecraftForgeClient.registerItemRenderer(Items.bullet50Case, new RenderBullet50Case());
         MinecraftForgeClient.registerItemRenderer(Items.pistol, new RenderPistol());
+        MinecraftForgeClient.registerItemRenderer(Items.vms, new RenderVMS());
     }
 
     @Override

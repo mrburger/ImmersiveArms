@@ -2,10 +2,11 @@
 item.laserRifle.name=Laser Rifle
 item.sniperRifle.name=Anti-Materiel Rifle
 item.plasmaRifle.name=Plasma Caster
-item.bullet50.name=.50 MMG Round
-item.bullet50Case.name=.50 MMG Case
+item.bullet50.name=12.7 HG Round
+item.bullet50Case.name=12.7 HG Case
 item.sniperMags.name=AMR Extended Magazines
-item.pistol.name=Gangsta Special
+item.pistol.name=Pistol
+item.earMuffs.name=Ear Muffs
 
 //Blocks
 tile.vanadiumOre.name= Vanadium Ore

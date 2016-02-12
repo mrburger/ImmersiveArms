@@ -16,6 +16,8 @@ public class Items
     public static Item sniperSuppressor;
     public static Item pistol;
     public static Item earMuffs;
+    public static Item vms;
+
     public static ItemArmor.ArmorMaterial EARMUFFS = EnumHelper.addArmorMaterial("EARMUFFS", -1, new int[]{0, 0, 0, 0}, 0);
 
 
@@ -28,6 +30,7 @@ public class Items
         GameRegistry.registerItem(sniperSuppressor = new ItemSniperSuppressor("snipersuppressor"), "snipersuppressor");
         GameRegistry.registerItem(pistol = new ItemPistol("pistol"), "pistol");
         GameRegistry.registerItem(earMuffs = new ItemEarMuffs("earMuffs", EARMUFFS, 0), "earMuffs");
+        GameRegistry.registerItem(vms = new ItemVMS("vmsRifle"), "vmsRifle");
     }
 
 }
