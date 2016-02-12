@@ -1,24 +1,30 @@
-package com.mrburgerus.ImmersiveArms.gui.client;
+package com.mrburgerus.ImmersiveArms;
 
 import blusunrize.immersiveengineering.client.ClientUtils;
 import com.mrburgerus.ImmersiveArms.ImmersiveArms;
+import com.mrburgerus.ImmersiveArms.entities.EntityBullet50;
+import com.mrburgerus.ImmersiveArms.item.items.ItemEarMuffs;
 import com.mrburgerus.ImmersiveArms.item.items.ItemSniperRifle;
+import com.mrburgerus.ImmersiveArms.item.items.Items;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
+import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import org.lwjgl.opengl.GL11;
 
-public class GuiZoom extends Gui {
+public class ClientEventHandler extends Gui {
     //fields
     private static final ResourceLocation texture = new ResourceLocation(ImmersiveArms.MODID + ":" + "textures/gui/scope.png");
     private Minecraft minecraft;
 
-    public GuiZoom(Minecraft mc)
+    public ClientEventHandler(Minecraft mc)
     {
         super();
         minecraft = mc;
@@ -31,7 +37,7 @@ public class GuiZoom extends Gui {
         {
             return;
         }
-        else if (event.type==RenderGameOverlayEvent.ElementType.CROSSHAIRS && minecraft.thePlayer.getHeldItem().getItem() instanceof  ItemSniperRifle && minecraft.thePlayer.isSneaking()) {
+        else if (event.type == RenderGameOverlayEvent.ElementType.CROSSHAIRS && minecraft.thePlayer.getHeldItem().getItem() instanceof  ItemSniperRifle && minecraft.thePlayer.isSneaking()) {
             event.setCanceled(true);
             int width = event.resolution.getScaledWidth();
             int height = event.resolution.getScaledHeight();
@@ -66,10 +72,15 @@ public class GuiZoom extends Gui {
     public void onFOVUpdate(FOVUpdateEvent event)
     {
         EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-        if(player.getCurrentEquippedItem() !=null && player.getCurrentEquippedItem().getItem() instanceof ItemSniperRifle && player.isSneaking())
+        if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemSniperRifle && player.isSneaking())
         {
             event.newfov = 0.1F;
         }
     }
+
+    @SubscribeEvent
+    public void entitySoundEvent(PlaySoundAtEntityEvent event)
+    {}
+
 
 }

@@ -25,7 +25,7 @@ import java.util.HashSet;
 public class ItemSniperRifle extends ItemWeapon
 {
     //fields
-    public static boolean isChambered = false;
+    private static boolean isChambered = false;
     private static boolean isCount = false;
     private int countDown = 0;
     private int delay = 40;

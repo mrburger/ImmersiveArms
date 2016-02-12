@@ -1,6 +1,12 @@
 package com.mrburgerus.ImmersiveArms.item.items;
 
+import com.mrburgerus.ImmersiveArms.ImmersiveArms;
 import com.mrburgerus.ImmersiveArms.entities.EntityBullet50;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import ibxm.Player;
+import net.java.games.input.Keyboard;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -8,6 +14,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
+
+import java.util.Map;
 
 public class ItemPistol extends ItemWeapon {
     //fields
@@ -15,7 +24,7 @@ public class ItemPistol extends ItemWeapon {
 
     public ItemPistol(String unlocalizedName) {
         super(unlocalizedName, "PISTOL");
-        this.setCreativeTab(null);
+        this.setCreativeTab(ImmersiveArms.immersiveTab);
     }
 
     @Override
@@ -35,20 +44,17 @@ public class ItemPistol extends ItemWeapon {
 
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
-        if (player.inventory.hasItem(Items.bullet50Case) && canFire && !world.isRemote)
-        {
-            player.inventory.consumeInventoryItem(Items.bullet50Case);
-            world.playSoundAtEntity(player, "immersivearms:anti-materiel", .1F, .0000001F);
+
             world.spawnEntityInWorld(new EntityBullet50(world, player));
-            canFire = false;
-        }
+            world.playSoundAtEntity(player, "immersivearms:anti-materiel", .1F, .0000001F);
+
+
 
         return itemStack;
     }
 
     @Override
-    public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
-        canFire = true;
-        return super.onEntitySwing(entityLiving, stack);
+    public void onUpdate(ItemStack p_77663_1_, World p_77663_2_, Entity entity, int p_77663_4_, boolean p_77663_5_) {
+        if ()
     }
 }
