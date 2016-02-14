@@ -86,12 +86,14 @@ public class RenderSniperRifle implements IItemRenderer {
             GL11.glRotatef(70F, 0F, 0F, 1F);
             GL11.glTranslatef(0.5F, 0.6F, 0F);
             //fix OBJ
+            GL11.glRotatef(180F, 0F, 0F, 1F);
+            GL11.glTranslatef(0F, 1F, 0F);
 
 
         }
         else if (type == ItemRenderType.ENTITY)
         {
-            float scale = 1F;
+            float scale = 2F;
             GL11.glScalef(scale, scale, scale);
             //rotate upright
             GL11.glRotatef(180F, 0F, 0F, 1F);

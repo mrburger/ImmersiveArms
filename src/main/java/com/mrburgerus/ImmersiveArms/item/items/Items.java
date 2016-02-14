@@ -17,6 +17,7 @@ public class Items
     public static Item pistol;
     public static Item earMuffs;
     public static Item vms;
+    public static Item scope;
 
     public static ItemArmor.ArmorMaterial EARMUFFS = EnumHelper.addArmorMaterial("EARMUFFS", -1, new int[]{0, 0, 0, 0}, 0);
 
@@ -31,6 +32,7 @@ public class Items
         GameRegistry.registerItem(pistol = new ItemPistol("pistol"), "pistol");
         GameRegistry.registerItem(earMuffs = new ItemEarMuffs("earMuffs", EARMUFFS, 0), "earMuffs");
         GameRegistry.registerItem(vms = new ItemVMS("vmsRifle"), "vmsRifle");
+        GameRegistry.registerItem(scope = new ItemVMSScope("vmsScope"), "vmsScope");
     }
 
 }

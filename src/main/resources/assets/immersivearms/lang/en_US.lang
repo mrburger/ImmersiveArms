@@ -7,6 +7,7 @@ item.bullet50Case.name=12.7 HG Case
 item.sniperMags.name=AMR Extended Magazines
 item.pistol.name=Pistol
 item.earMuffs.name=Ear Muffs
+item.vmsRifle.name=VMS
 
 //Blocks
 tile.vanadiumOre.name= Vanadium Ore

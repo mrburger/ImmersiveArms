@@ -5,12 +5,14 @@ import com.mrburgerus.ImmersiveArms.ImmersiveArms;
 import com.mrburgerus.ImmersiveArms.entities.EntityBullet50;
 import com.mrburgerus.ImmersiveArms.item.items.ItemEarMuffs;
 import com.mrburgerus.ImmersiveArms.item.items.ItemSniperRifle;
+import com.mrburgerus.ImmersiveArms.item.items.ItemVMS;
 import com.mrburgerus.ImmersiveArms.item.items.Items;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.FOVUpdateEvent;
@@ -72,10 +74,20 @@ public class ClientEventHandler extends Gui {
     public void onFOVUpdate(FOVUpdateEvent event)
     {
         EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+        ItemStack stack = player.inventory.getCurrentItem();
         if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemSniperRifle && player.isSneaking())
         {
             event.newfov = 0.1F;
         }
+        else if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemVMS && ((ItemVMS) player.getCurrentEquippedItem().getItem()).getUpgrades(stack).getBoolean("scope") && player.isSneaking())
+        {
+            event.newfov = 0.35F;
+        }
+        else if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemVMS && player.isSneaking())
+        {
+            event.newfov = 0.7F;
+        }
+
     }
 
     @SubscribeEvent
